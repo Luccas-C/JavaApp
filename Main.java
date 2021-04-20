@@ -1,7 +1,5 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-
 import java.util.List;
 
 public class Main {
@@ -22,40 +20,49 @@ public class Main {
 	 	middle.add(tituloTextField);
 	 
 	 	middle.add(new Label("Sinopse", Color.BLACK));
-	 TextField TextField = new TextField();
-	 	middle.add(TextField);
+	 TextField sinTextField = new TextField();
+	 	middle.add(sinTextField);
 	 
 	 	middle.add(new Label("Gênero", Color.BLACK));
 	 	String[] genero = {"Ação", "Aventura", "Suspense"};
-	 	middle.add(new JComboBox<String>(genero));
-		
+	 	JComboBox generos = new JComboBox<String>(genero);
+	 	middle.add(generos);
+	 	
 		JButton buttonSave = new JButton("Salvar");
 		JButton buttonCancel = new JButton("Cancelar");
 		middle.add(buttonSave);
 		middle.add(buttonCancel);
 		middle.setLayout(new GridLayout(10,1));
-		
+	
 		
 		JPanel right = new JPanel();
 		right.add(new Label("Onde Assistir", Color.BLACK));
+		
 		List<String> listaAssistir = List.of("Netflix", "Prime Vídeo", "Pirate Bay                                      ");
 		RadioGroup group = new RadioGroup(listaAssistir);
 		right.add(group);
 		group.setLayout(new GridLayout(3,1));
-		right.add(new JCheckBox("Assistido"));
 		
-		right.add(new StarRater(5, 2.5f));
+		JCheckBox assistido = new JCheckBox("Assistido");
+		right.add(assistido);
+		
+		StarRater estrelas = new StarRater(5 , 2.5f);
+		right.add(estrelas);
 		right.setLayout(new GridLayout(4,1));
+		
+		buttonSave.addActionListener(new ButtonListener(tituloTextField,sinTextField,generos,assistido,estrelas,group));
 		
 		JTabbedPane tabs = new JTabbedPane();
 		tabs.add("Cadastro",mainContainer);
+		tabs.add("Lista",new JPanel());
+		
 		mainContainer.add(left,BorderLayout.WEST);
 		mainContainer.add(middle,BorderLayout.CENTER);
 		mainContainer.add(right,BorderLayout.EAST);
 		
 		window.add(tabs);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(800, 700);
+		window.setSize(800, 500);
 		window.setVisible(true);
 	
 }
