@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.persistence.TypedQuery;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -56,10 +55,10 @@ public class PainelLista extends JPanel implements ActionListener{
 		modelo.setNumRows(0);
 		
 		Dao dao = new Dao();
-		TypedQuery<Filme> lista = (TypedQuery<Filme>) dao.query();
+		List<Filme> lista = dao.query();
 		
 		for (Filme filme : lista) {
-			TypedQuery<Filme> linha = { 
+			String[] linha = { 
 				filme.getId()+"",
 				filme.getTitulo(),
 				filme.getSinopse(),

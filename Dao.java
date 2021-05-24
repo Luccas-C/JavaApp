@@ -17,10 +17,10 @@ public class Dao {
 		//manager.close();
 	}
 	
-	public TypedQuery<Filme> query() {
+	public List<Filme> query() {
 		
 		TypedQuery<Filme> query =  manager.createQuery("SELECT f FROM Filme f" , Filme.class);
-		return  (TypedQuery<Filme>) query.getResultList();
+		return   query.getResultList();
 	}
 	
 	public void apagar(Filme filme) {
@@ -37,5 +37,8 @@ public class Dao {
 		return manager.find(Filme.class, id);
 	}
 	
+	//public void edit(Long id) {
+		//edit(buscarPorId(id));
+	//}
 	
 }
