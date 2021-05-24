@@ -17,6 +17,7 @@ public class PainelLista extends JPanel implements ActionListener{
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private JButton carregar = new JButton("carregar");
 	private JButton apagar = new JButton("apagar");
+	private JButton editar = new JButton("editar");
 	private JTable tabela = new JTable(modelo); 
 	private JLabel lista = new JLabel("Lista de Filmes");
 	
@@ -42,12 +43,13 @@ public class PainelLista extends JPanel implements ActionListener{
 		JPanel botoes = new JPanel();
 		botoes.add(apagar);
 		botoes.add(carregar);
+		botoes.add(editar);
 		
 		add(botoes, BorderLayout.SOUTH);
 		
 		carregar.addActionListener(this);
 		apagar.addActionListener(this);
-		
+		editar.addActionListener(this);
 		
 	}
 	
@@ -84,9 +86,28 @@ public class PainelLista extends JPanel implements ActionListener{
 		}
 	}
 	
+	private void editar() {
+		Dao dao = new Dao();
+		int linha = tabela.getSelectedRow();
+		String id = tabela.getValueAt(linha, 0).toString();
+		String titulo = tabela.getValueAt(linha, 1).toString();
+		String sinopse = tabela.getValueAt(linha, 2).toString();
+		String genero = tabela.getValueAt(linha, 3).toString();
+		String ondeAssistir = tabela.getValueAt(linha, 4).toString();
+		String assistido = tabela.getValueAt(linha, 5).toString();
+		
+		boolean foiAssistido = (assistido == "true")? true : false;
+		
+		String avaliacao = tabela.getValueAt(linha, 6).toString();
+		Filme filme = new Filme(Long.valueOf(id) ,titulo, sinopse, genero, ondeAssistir, foiAssistido,Integer.parseInt(avaliacao));
+		dao.edit(filme);
+		//carregarDados();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == carregar) carregarDados();		
 		if (e.getSource() == apagar) apagar();
+		if (e.getSource() == editar) editar();
 	}
 }

@@ -81,6 +81,23 @@ public class Filme {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public Filme(Long id, String titulo, String sinopse, String genero, String ondeAssistir, boolean assistido,
+			int avaliacao) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.sinopse = sinopse;
+		this.genero = genero;
+		this.ondeAssistir = ondeAssistir;
+		this.assistido = assistido;
+		this.avaliacao = avaliacao;
+	}
+
+	public Filme() {
+		super();
+	}
+	
 	
 
 

@@ -37,8 +37,17 @@ public class Dao {
 		return manager.find(Filme.class, id);
 	}
 	
-	//public void edit(Long id) {
-		//edit(buscarPorId(id));
-	//}
+	public void edit(Filme filme) {
+		Filme antigo = manager.find(Filme.class,filme.getId());
+		manager.getTransaction().begin();
+		antigo.setTitulo(filme.getTitulo());
+		antigo.setSinopse(filme.getSinopse());
+		antigo.setGenero(filme.getGenero());
+		antigo.setOndeAssistir(filme.getOndeAssistir());
+		antigo.setAssistido(filme.isAssistido());
+		antigo.setAvaliacao(filme.getAvaliacao());
+		manager.getTransaction().commit();
+		
+	}
 	
 }
